@@ -1,4 +1,4 @@
-proj2-pd7-06-Pizza
+Pizza Movies
 ==================
 
-Yaseen, Nick, Victoria, Willy
+Yaseen, Nick, Victoria, Will

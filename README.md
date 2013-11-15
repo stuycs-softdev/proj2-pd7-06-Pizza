@@ -7,7 +7,7 @@ We will be making an application that searches for information about any movie y
 
 Possible API's:
 
-Info - IMDB
+Info - Open Movie Database
 
 Description, Price - ITunes
 

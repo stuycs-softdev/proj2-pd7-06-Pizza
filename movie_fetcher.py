@@ -4,12 +4,7 @@ import urllib2
 
 # title, 
 
-itunes_terms = {
-    'title':'trackName',
-    'price':'trackPrice',
-    'desc':'longDescription',
-    'trailer':'previewUrl'
-}
+
 
 def extract_terms(jsonr, terms):
     ret = {k:jsonr[terms[k]] for k in terms}
@@ -22,7 +17,7 @@ def itunes_json(term):
 
 def printd(d):
     print '%s'%d['title']
-    print '[ %.2f ]'%d['price']
+    print '[ $%.2f ]'%d['price']
     print '\n\t%s'%d['desc']
 
 #print [k for k in itunes_json(raw_input('Lookup in iTunes: '))['results'][0]]

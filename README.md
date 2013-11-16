@@ -5,16 +5,14 @@ Yaseen, Nick, Victoria, Will
 
 We will be making an application that searches for information about any movie you request.
 
-Possible API's:
+Possible APIs:
 
 Info - Open Movie Database
 
-Description, Price - ITunes
+Description, Price - iTunes
 
 Reviews - Rotten Tomatoes
 
-Trailers, Clips - YouTube
+Trailers, Clips - YouTube, iTunes
 
-Streaming - Netflix
-
-Buy a copy - Amazon, Ebay
+Buy a copy - Amazon, Ebay, iTunes

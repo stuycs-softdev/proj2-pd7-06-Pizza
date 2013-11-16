@@ -1,7 +1,7 @@
 import json
 from urllib import urlencode
 import urllib2
-
+import api_config as config
 # title, 
 
 
@@ -25,6 +25,6 @@ if __name__ == '__main__':
     print '-'*80
     try:
         itj = itunes_json(raw_input('Lookup in iTunes: '))['results'][0]
-        printd(extract_terms(itj, itunes_terms))
+        printd(extract_terms(itj, config.itunes_terms))
     except:
         print 'Lookup failed.'

@@ -4,11 +4,13 @@ import urllib2
 import api_config as config
 # title, 
 
-
-
 def extract_terms(jsonr, terms):
     ret = {k:jsonr[terms[k]] for k in terms}
     return ret
+
+def itunes_lookup(term):
+    itj = itunes_json(term)['results'][0]
+    return extract_terms(itj, config.itunes_terms)
 
 def itunes_json(term):
     url = 'https://itunes.apple.com/search?'

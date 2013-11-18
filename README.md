@@ -7,9 +7,9 @@ We will be making an application that searches for information about any movie y
 
 ###Possible APIs:
 
-Info - Open Movie Database
+Info - Open Movie Database (works)
 
-Description, Price - iTunes
+Description, Price - iTunes (works)
 
 Reviews - Rotten Tomatoes
 

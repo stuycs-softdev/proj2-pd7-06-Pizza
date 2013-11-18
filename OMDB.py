@@ -8,6 +8,9 @@ import sys
 usage = """
 Usage: python OMDB.py 'movie title'
 e.g python OMDB.py Titanic
+
+Use "+" to replace spaces
+e.g python OMDB.py The+Last+Airbender
 """
 
 if len(sys.argv)!=2:

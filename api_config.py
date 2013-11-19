@@ -4,3 +4,9 @@ itunes_terms = {
     'desc':'longDescription',
     'trailer':'previewUrl'
 }
+omdb_terms = {
+    'title':'Title',
+    'desc':'Plot',
+    'img':'Poster',
+    'cast':'Actors'
+}

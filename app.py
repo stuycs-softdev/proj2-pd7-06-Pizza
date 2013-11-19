@@ -4,6 +4,8 @@ import movie_fetcher
 
 app = Flask(__name__)
 
+# just some basic testing; this can be removed
+
 @app.route('/')
 def home():
     return render_template('search.html')

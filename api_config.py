@@ -1,3 +1,7 @@
+# defines a standard set of keys for all api requests to return
+
+# {'movie_fetcher key' : 'api returned key'}
+
 itunes_terms = {
     'title':'trackName',
     'price':'trackPrice',

@@ -1,9 +1,17 @@
+# movie_fetcher.py
+# SERVICE_lookup(term) returns search results from SERVICE in a dict with keys as defined by api_config.py
+# SERVICE_json(term) returns search results from SERVICE in its json defined format
+
+
 import json
 from urllib import urlencode
 import urllib2
 import api_config as config
-# title, 
 
+# utils, etc. 
+
+# parses json returned dicts to movie_fetcher returned dicts, with key to key mapping as defined in terms {'newKey':'oldKey'}
+# usually used with api_config returned terms dicts
 def extract_terms(jsonr, terms):
     ret = {k:jsonr[terms[k]] for k in terms}
     return ret
@@ -35,14 +43,13 @@ def omdb_json(title):
     js['Actors'] = [a.strip() for a in js['Actors'].split(',')]
     return js
 
-# etc.
+# testing
 
 def printd(d):
     print '%s'%d['title']
     print '[ $%.2f ]'%d['price']
     print '\n\t%s'%d['desc']
 
-#print [k for k in itunes_json(raw_input('Lookup in iTunes: '))['results'][0]]
 if __name__ == '__main__':
     print '-'*80
     try:

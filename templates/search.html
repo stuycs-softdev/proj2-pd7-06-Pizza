@@ -1,6 +1,41 @@
-<html>
-  <form action="/m" method="POST" name="register">
-    <input type="text" name="title" placeholder="Search movies by title...">
-    <input type="submit">
-  </form>
-</html>
+
+<head>
+  <link rel="stylesheet" href="../static/css/foundation.css">
+  <style>
+    .whitetext {color:#ebebeb;}
+  </style>
+</head>
+<body>
+  <div class="row">
+    <br>
+  </div>
+  <div class="row" style="background:#808080;">
+    <div class="large-8 columns large-centered">
+      <div class="row">
+	<form class="custom" action="/m" method="POST" name="register">
+	  <div class="row">
+	    <h1 class="whitetext">Looking for a movie?</h1>
+	  </div>
+
+	  <div class="row">
+	    <div class="large-12 columns">
+	      <div class="large-7 columns">
+		<h3 class="whitetext">Would you like to:</h3>
+	      </div>
+	      <div class="large-5 columns">
+		<br>
+		<label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1"  value="legal" > Follow the law?</label>
+		<label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1" value="illegal" > Meeh.</label>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <br>
+	    <input type="text" name="title" placeholder="Search movies by title...">
+	    <input type="submit">
+	  </div>
+	</form>
+      </div>
+    </div>
+  </div>
+</body>

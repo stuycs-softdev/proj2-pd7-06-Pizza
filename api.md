@@ -5,3 +5,4 @@
 [OMDB](http://www.omdbapi.com)  
 [Rotten Tomatoes](http://developer.rottentomatoes.com)  
 [YouTube](https://developers.google.com/youtube/v3/docs/)  
+[The Pirate Bay](https://github.com/thekarangoel/TPB)

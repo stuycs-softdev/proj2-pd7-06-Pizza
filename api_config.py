@@ -6,7 +6,8 @@ itunes_terms = {
     'title':'trackName',
     'price':'trackPrice',
     'desc':'longDescription',
-    'trailer':'previewUrl'
+    'trailer':'previewUrl',
+    'img':'artworkUrl100'
 }
 omdb_terms = {
     'title':'Title',

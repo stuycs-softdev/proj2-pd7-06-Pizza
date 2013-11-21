@@ -8,7 +8,7 @@ from urllib import urlencode
 import urllib2
 import api_config as config
 
-# utils, etc. 
+# utils, etc.
 
 # parses json returned dicts to movie_fetcher returned dicts, with key to key mapping as defined in terms {'newKey':'oldKey'}
 # usually used with api_config returned terms dicts
@@ -42,6 +42,20 @@ def omdb_json(title):
     js = json.load(urllib2.urlopen(url))
     js['Actors'] = [a.strip() for a in js['Actors'].split(',')]
     return js
+
+# TasteKid
+
+def tastekid_lookup(title):
+    return extract_terms(tastekid_json(title), config.tk_terms)
+
+def tastekid_json(title):
+    url = 'http://www.tastekid.com/ask/ws'
+    url += urlencode({'q':title, 'verbose':'1', 'format':'json'})
+    url += '//movies'
+    js = json.load(urllib2.urlopen(url))
+    return js
+
+def tastekid_cache(dict):
 
 # testing
 

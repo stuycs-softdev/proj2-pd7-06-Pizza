@@ -25,3 +25,5 @@ print data["movies"][0]["synopsis"]
 print data["movies"][0]["posters"]["original"]
 print data["movies"][0]["abridged_cast"][1]["name"]
 print data["movies"][0]["abridged_cast"][1]["characters"]
+
+#http://developer.rottentomatoes.com/docs

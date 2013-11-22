@@ -2,7 +2,6 @@
 # SERVICE_lookup(term) returns search results from SERVICE in a dict with keys as defined by api_config.py
 # SERVICE_json(term) returns search results from SERVICE in its json defined format
 
-
 import json
 from urllib import urlencode
 import urllib2
@@ -53,8 +52,11 @@ def tastekid_lookup(title):
     tkjson = tastekid_json(title)['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms)
     results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
-    tk = {'title':title, 'info':item, 'suggestions':results}
+    suggestions = [r['title'] for r in results]
+    tk = {'title':title, 'info':item, 'suggestions':suggestions}
     cache.cache(tk)
+    for r in results:
+        cache.cache(r)
     return tk
 
 def tastekid_json(title):

@@ -21,7 +21,7 @@ omdb_terms = {
 
 #tastekid
 tk_terms = {
-    'title':'name',
+    'title':'Name',
     'short_desc':'wTeaser',
     'read_more_url':'wUrl',
     'youtube_title':'yTitle',

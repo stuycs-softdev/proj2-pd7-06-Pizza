@@ -50,20 +50,21 @@ def omdb_json(title):
 def tastekid_lookup(title):
     if cache.in_cache(title):
         return retrieve_cached(title)
-    tk = extract_terms(tastekid_json(title), config.tk_terms)
+    tkjson = tastekid_json(title)['Similar']
+    item = extract_terms(tkjson['Info'][0], config.tk_terms)
+    results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
+    tk = {'title':title, 'info':item, 'suggestions':results}
     cache.cache(tk)
     return tk
 
 def tastekid_json(title):
-    url = 'http://www.tastekid.com/ask/ws'
-    url += urlencode({'q':title, 'verbose':'1', 'format':'json'
+    url = 'http://www.tastekid.com/ask/ws?'
+    url += urlencode({'q':title+'//movies', 'verbose':'1', 'format':'JSON',
                       'f':keys.tk_f, 'k':keys.tk_k
                   })
-    url += '//movies'
+    print "tk url:", url
     js = json.load(urllib2.urlopen(url))
     return js
-
-def tastekid_cache(dict):
     
 # testing
 

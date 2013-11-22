@@ -2,13 +2,14 @@
 # SERVICE_lookup(term) returns search results from SERVICE in a dict with keys as defined by api_config.py
 # SERVICE_json(term) returns search results from SERVICE in its json defined format
 
-
 import json
 from urllib import urlencode
 import urllib2
 import api_config as config
+import keys
+import cache
 
-# utils, etc. 
+# utils, etc.
 
 # parses json returned dicts to movie_fetcher returned dicts, with key to key mapping as defined in terms {'newKey':'oldKey'}
 # usually used with api_config returned terms dicts
@@ -43,6 +44,29 @@ def omdb_json(title):
     js['Actors'] = [a.strip() for a in js['Actors'].split(',')]
     return js
 
+# TasteKid
+
+def tastekid_lookup(title):
+    if cache.in_cache(title):
+        return retrieve_cached(title)
+    tkjson = tastekid_json(title)['Similar']
+    item = extract_terms(tkjson['Info'][0], config.tk_terms)
+    results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
+    suggestions = [r['title'] for r in results]
+    tk = {'title':title, 'info':item, 'suggestions':suggestions}
+    cache.cache(tk)
+    for r in results:
+        cache.cache(r)
+    return tk
+
+def tastekid_json(title):
+    url = 'http://www.tastekid.com/ask/ws?'
+    url += urlencode({'q':title+'//movies', 'verbose':'1', 'format':'JSON',
+                      'f':keys.tk_f, 'k':keys.tk_k
+                  })
+    js = json.load(urllib2.urlopen(url))
+    return js
+    
 # testing
 
 def printd(d):

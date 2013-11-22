@@ -28,22 +28,22 @@ def youtube_search(options):
     if search_result["id"]["kind"] == "youtube#video":
       videos.append("%s (%s)" % (search_result["snippet"]["title"],
                                  search_result["id"]["videoId"]))
-    elif search_result["id"]["kind"] == "youtube#channel":
-      channels.append("%s (%s)" % (search_result["snippet"]["title"],
-                                   search_result["id"]["channelId"]))
-    elif search_result["id"]["kind"] == "youtube#playlist":
-      playlists.append("%s (%s)" % (search_result["snippet"]["title"],
-                                    search_result["id"]["playlistId"]))
+    #elif search_result["id"]["kind"] == "youtube#channel":
+     # channels.append("%s (%s)" % (search_result["snippet"]["title"],
+      #                             search_result["id"]["channelId"]))
+    #elif search_result["id"]["kind"] == "youtube#playlist":
+     # playlists.append("%s (%s)" % (search_result["snippet"]["title"],
+      #                              search_result["id"]["playlistId"]))
 
   print "Videos:\n", "\n".join(videos), "\n"
-  print "Channels:\n", "\n".join(channels), "\n"
-  print "Playlists:\n", "\n".join(playlists), "\n"
+  #print "Channels:\n", "\n".join(channels), "\n"
+  #print "Playlists:\n", "\n".join(playlists), "\n"
 
 
 if __name__ == "__main__":
   parser = OptionParser()
   parser.add_option("--q", dest="q", help="Search term",
-    default="Google")
+    default="looper trailer")
   parser.add_option("--max-results", dest="maxResults",
     help="Max results", default=25)
   (options, args) = parser.parse_args()

@@ -64,7 +64,6 @@ def tastekid_json(title):
     url += urlencode({'q':title+'//movies', 'verbose':'1', 'format':'JSON',
                       'f':keys.tk_f, 'k':keys.tk_k
                   })
-    print "tk url:", url
     js = json.load(urllib2.urlopen(url))
     return js
     

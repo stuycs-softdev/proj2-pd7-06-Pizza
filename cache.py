@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from datetime import datetime
 
-_cache = MongoClient().db.cache
+_cache = MongoClient().pizzadb.cache
 
 def in_cache(title):
     res = _cache.find_one({'title_lower':title.lower()})
@@ -22,4 +22,4 @@ def cache(d):
 def _isexpired(date):
     now = datetime.now()
     delta = now - date
-    return delta.days > 3
+    return delta.days > 10

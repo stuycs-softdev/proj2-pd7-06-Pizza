@@ -3,7 +3,7 @@ from datetime import datetime
 
 _cache = MongoClient().db.cache
 
-def check_cache(title):
+def in_cache(title):
     res = _cache.find_one({'title_lower':title.lower()})
     if (res is None or _isexpired(res['mod_date'])):
         return False

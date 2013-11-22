@@ -7,6 +7,8 @@ import json
 from urllib import urlencode
 import urllib2
 import api_config as config
+import keys
+import cache
 
 # utils, etc.
 
@@ -46,17 +48,23 @@ def omdb_json(title):
 # TasteKid
 
 def tastekid_lookup(title):
-    return extract_terms(tastekid_json(title), config.tk_terms)
+    if cache.in_cache(title):
+        return retrieve_cached(title)
+    tk = extract_terms(tastekid_json(title), config.tk_terms)
+    cache.cache(tk)
+    return tk
 
 def tastekid_json(title):
     url = 'http://www.tastekid.com/ask/ws'
-    url += urlencode({'q':title, 'verbose':'1', 'format':'json'})
+    url += urlencode({'q':title, 'verbose':'1', 'format':'json'
+                      'f':keys.tk_f, 'k':keys.tk_k
+                  })
     url += '//movies'
     js = json.load(urllib2.urlopen(url))
     return js
 
 def tastekid_cache(dict):
-
+    
 # testing
 
 def printd(d):

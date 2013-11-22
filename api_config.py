@@ -15,3 +15,16 @@ omdb_terms = {
     'img':'Poster',
     'cast':'Actors'
 }
+
+
+# recommendations
+
+#tastekid
+tk_terms = {
+    'title':'Name',
+    'short_desc':'wTeaser',
+    'read_more_url':'wUrl',
+    'youtube_title':'yTitle',
+    'youtube_url':'yUrl',
+    'youtube_id':'yID'
+}

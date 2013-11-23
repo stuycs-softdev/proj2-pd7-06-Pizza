@@ -6,7 +6,7 @@ import json
 from urllib import urlencode
 import urllib2
 import api_config as config
-import keys
+#import keys
 import cache
 
 # utils, etc.
@@ -46,7 +46,7 @@ def omdb_json(title):
 
 # TasteKid
 
-def tastekid_lookup(title):
+'''def tastekid_lookup(title):
     if cache.in_cache(title):
         return retrieve_cached(title)
     tkjson = tastekid_json(title)['Similar']
@@ -66,7 +66,7 @@ def tastekid_json(title):
                   })
     js = json.load(urllib2.urlopen(url))
     return js
-    
+'''    
 # testing
 
 def printd(d):

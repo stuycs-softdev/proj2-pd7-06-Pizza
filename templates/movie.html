@@ -8,34 +8,53 @@
   float: right;
   margin: 10px;
   }
+  #price {
+  color:green;
+  }
 </style>
 
 {% if legality == "legal" %}
 <body>
-  <img id="poster" src="{{omdb.img}}" alt="{{omdb.title}}">
-  {% if itunes %}
-  <h1>{{itunes.title}}</h1>
-  <b>{{itunes.price}}</b> <br>
-  {{itunes.desc}}
-  {% elif omdb %}
-  <h1>{{omdb.title}}</h1> <br>
-  {{omdb.desc}}
-  {% endif %}
-  <hr>
-  <ul>
-    {% for a in omdb.cast %}
-    <li>{{a}}</li>
-      {% endfor %}
-  </ul>
-    <!--  I can't figure out the iTunes video inclusion. I think there's
-  some weird drm involved
-  <video controls="" autoplay="" name="media">
-    <source src="{{itunes.trailer}}" type="video/x-m4v">
-  </video> -->
+  
+  
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="large-4 columns push-8">
+	<img id="poster" src="{{omdb.img}}" alt="{{omdb.title}}">
+      </div>
+      <div class="large-8 pull-4 columns">
+	{% if itunes %}
+	<h1>{{itunes.title}}</h1>
+	<b id="price">{{itunes.price}}</b> <br>
+	{{itunes.desc}}
+	{% elif omdb %}
+	<h1>{{omdb.title}}</h1> <br>
+	{{omdb.desc}}
+	{% endif %}
+	<hr>
+	<ul class="no-bullet">
+	  <li><h5>Cast</h5>
+	    <ul>
+	      {% for a in omdb.cast %}
+	      <li>{{a}}</li>
+	      {% endfor %}
+	    </ul>
+	  </li>
+	</ul>
+	<!--  I can't figure out the iTunes video inclusion. I think there's
+	      some weird drm involved
+	      <video controls="" autoplay="" name="media">
+		<source src="{{itunes.trailer}}" type="video/x-m4v">
+	      </video> -->
+      </div>
+    </div>
+  </div>
 </body>
 {% elif legality %}
 <body>
-  PIRATE BAYYYYYYY
+  <div class="row">
+    PIRATE BAYYYYYYY
+  </div>
 </body>
 {% endif %}
 

@@ -1,4 +1,17 @@
 <html>
+<head>
+  <link rel="stylesheet" href="../static/css/foundation.css">
+</head>
+
+<style>
+  #poster {
+  float: right;
+  margin: 10px;
+  }
+</style>
+
+{% if legality == "legal" %}
+<body>
   <img id="poster" src="{{omdb.img}}" alt="{{omdb.title}}">
   {% if itunes %}
   <h1>{{itunes.title}}</h1>
@@ -19,11 +32,12 @@
   <video controls="" autoplay="" name="media">
     <source src="{{itunes.trailer}}" type="video/x-m4v">
   </video> -->
-</html>
+</body>
+{% elif legality %}
+<body>
+  PIRATE BAYYYYYYY
+</body>
+{% endif %}
 
-<style>
-#poster {
-float: right;
-margin: 10px;
-}
-</style>
+
+</html>

@@ -67,6 +67,17 @@ def tastekid_json(title):
     js = json.load(urllib2.urlopen(url))
     return js
     
+# Rotten Tomatoes
+
+def rt_lookup(title):
+    pass
+
+def rt_json(title):
+    url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=vq8bhcvbrnmmwndpv9cw9twr&'
+    url += urlencode({'q':title, 'page_limit':1})
+    js = json.load(urllib2.urlopen(url))
+    return js
+
 # testing
 
 def printd(d):

@@ -25,4 +25,4 @@ def remove(title):
 def _isexpired(date):
     now = datetime.now()
     delta = now - date
-    return delta.days > 3
+    return delta.days > 10

@@ -5,9 +5,13 @@
 itunes_terms = {
     'title':'trackName',
     'price':'trackPrice',
+    'currency':'currency',
+    'genre':'primaryGenreName',
+    'explicit':'trackExplicitness',
     'desc':'longDescription',
     'trailer':'previewUrl',
-    'img':'artworkUrl100'
+    'img':'artworkUrl100',
+    'purchase_url':'trackViewUrl'
 }
 omdb_terms = {
     'title':'Title',
@@ -20,9 +24,10 @@ omdb_terms = {
 # recommendations
 
 #tastekid
+# BEWARE this stuff is under tastekid_lookup('movie')['info']
 tk_terms = {
     'title':'Name',
-    'short_desc':'wTeaser',
+    'desc':'wTeaser',
     'read_more_url':'wUrl',
     'youtube_title':'yTitle',
     'youtube_url':'yUrl',

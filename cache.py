@@ -13,8 +13,8 @@ def retrieve_cached(title):
     return _cache.find_one({'title_lower':title.lower()})
 
 def cache(d):
-    print 'caching', d['title'],
-    print 'with results', d['suggestions'] if 'suggestions' in d else None
+    #print 'caching', d['title'],
+    #print 'with results', d['suggestions'] if 'suggestions' in d else None
     d['title_lower'] = d['title'].lower()
     d['mod_date'] = datetime.now()
     _cache.update({'title':d['title']}, d, upsert=True)

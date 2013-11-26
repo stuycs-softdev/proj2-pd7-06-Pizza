@@ -35,12 +35,15 @@ def itunes_json(term):
 # OMDB
 
 def omdb_lookup(title):
-    return extract_terms(omdb_json(title), config.omdb_terms)
+    js = omdb_json(title)
+    return extract_terms(js, config.omdb_terms) if js is not None else None
 
 def omdb_json(title):
     url = 'http://www.omdbapi.com/?'
     url += urlencode({'t':title, 'r':'json', 'plot':'full', 'tomatoes':'true'})
     js = json.load(urllib2.urlopen(url))
+    if js['Response'] == 'False':
+        return None
     js['Actors'] = [a.strip() for a in js['Actors'].split(',')]
     return js
 

@@ -46,17 +46,21 @@ def omdb_json(title):
 
 # TasteKid
 
-def tastekid_lookup(title):
-    if cache.in_cache(title):
-        return retrieve_cached(title)
+def tastekid_lookup(title, check_cache=True, load_rec_content=False):
+    if check_cache and cache.in_cache(title):
+        ret = cache.retrieve_cached(title)
+        if (not load_rec_content) or ('suggestions' in ret):
+            return ret
     tkjson = tastekid_json(title)['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms)
     results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
     suggestions = [r['title'] for r in results]
     tk = {'title':title, 'info':item, 'suggestions':suggestions}
+    if cache.in_cache(title):
+        cache.remove(title)
     cache.cache(tk)
     for r in results:
-        cache.cache(r)
+        cache.cache({'title':r['title'], 'info':r})
     return tk
 
 def tastekid_json(title):

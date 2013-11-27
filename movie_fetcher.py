@@ -18,13 +18,15 @@ def extract_terms(jsonr, terms):
     return ret
 
 # iTunes
-
-def itunes_lookup(term):
-    try:
-        itj = itunes_json(term)['results'][0]
-        return extract_terms(itj, config.itunes_terms)
-    except:
-        return None
+def itunes_lookup(term, check_cache=True):
+    if check_cache:
+        ret = cacje.retrieve_valid(title)
+        if ret is not None:
+            iterms = [k for k in config.itunes_terms]
+            ret = {k:v for k,v in ret['info'] if k in iterms}
+            return ret
+    itj = itunes_json(term)['results'][0]
+    return extract_terms(itj, config.itunes_terms) if itj is not None else None
 
 def itunes_json(term):
     url = 'https://itunes.apple.com/search?'
@@ -33,8 +35,13 @@ def itunes_json(term):
     return js
 
 # OMDB
-
-def omdb_lookup(title):
+def omdb_lookup(title, check_cache=True):
+    if check_cache:
+        ret = cache.retrieve_valid(title)
+        if ret is not None:
+            oterms = [k for k in config.omdb_terms]
+            ret = {k:v for k,v in ret['info'] if k in oterms}
+            return ret
     js = omdb_json(title)
     return extract_terms(js, config.omdb_terms) if js is not None else None
 
@@ -48,22 +55,24 @@ def omdb_json(title):
     return js
 
 # TasteKid
-
 def tastekid_lookup(title, check_cache=True, load_rec_content=False):
     if check_cache and cache.in_cache(title):
-        ret = cache.retrieve_cached(title)
+        ret = cache.retrieve_valid(title)
         if (not load_rec_content) or ('suggestions' in ret):
             return ret
     tkjson = tastekid_json(title)['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms)
     results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
     suggestions = [r['title'] for r in results]
-    tk = {'title':item['title'], 'info':item, 'suggestions':suggestions}
+    tk = {'title':item['title'], 'suggestions':suggestions}
     if cache.in_cache(title):
         cache.remove(title)
+    cache.upsert_properties(item)
     cache.cache(tk)
     for r in results:
-        cache.cache({'title':r['title'], 'info':r})
+        cache.upsert_properties(r)
+    for k,v in config.tk_terms.keys():
+        tk[k] = v
     return tk
 
 def tastekid_json(title):
@@ -73,18 +82,3 @@ def tastekid_json(title):
                   })
     js = json.load(urllib2.urlopen(url))
     return js
-    
-# testing
-
-def printd(d):
-    print '%s'%d['title']
-    print '[ $%.2f ]'%d['price']
-    print '\n\t%s'%d['desc']
-
-if __name__ == '__main__':
-    print '-'*80
-    try:
-        itj = itunes_json(raw_input('Lookup in iTunes: '))['results'][0]
-        printd(extract_terms(itj, config.itunes_terms))
-    except:
-        print 'Lookup failed.'

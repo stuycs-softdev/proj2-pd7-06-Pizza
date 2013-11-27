@@ -9,8 +9,21 @@ def in_cache(title):
         return False
     return True
 
+def retrieve_valid(title):
+    if in_cache(title):
+        return retrieve_cached(title)
+    else:
+        return None
+
 def retrieve_cached(title):
     return _cache.find_one({'title_lower':title.lower()})
+
+def upsert_properties(props):
+    info = retrieve_cached['info']
+    for k, v in props:
+        if k != 'title':
+            info[k] = v
+    cache({'title':props['title'], 'info':info})
 
 def cache(d):
     #print 'caching', d['title'],

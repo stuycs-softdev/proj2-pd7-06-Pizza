@@ -38,13 +38,13 @@ class Movie():
             self.title = omdb['title']
         if tk is not None:
             self.yt = {
-                'ident':tk['info']['youtube_id'],
-                'url':tk['info']['youtube_url'],
-                'title':tk['info']['youtube_title']
+                'ident':tk['youtube_id'],
+                'url':tk['youtube_url'],
+                'title':tk['youtube_title']
             }
-            self.wiki_url = tk['info']['read_more_url']
+            self.wiki_url = tk['read_more_url']
             if self.desc is None or self.desc == 'N/A':
-                self.desc = itunes['desc']
+                self.desc = tk['desc']
             if self.title is None:
                 self.title = tk['title']
             self.recs = RecList(self.title)

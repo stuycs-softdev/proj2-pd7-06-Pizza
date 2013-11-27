@@ -72,7 +72,7 @@ class RecList():
         self.reset()
         for i in range(self._index, len(self.unloaded)):
             self.next()
-        self.rese(sindex)
+        self.reset(sindex)
         return self.loaded
 
     def next(self):

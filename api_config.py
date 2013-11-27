@@ -16,6 +16,13 @@ omdb_terms = {
     'cast':'Actors'
 }
 
+rt_terms = {
+    "title":"title",
+    "rating":"mpaa_rating",
+    "statement":"critics_consensus",
+    "scores":"ratings",
+    "posters":"posters"
+}
 
 # recommendations
 

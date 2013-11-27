@@ -22,12 +22,14 @@ class Movie():
             self.load_recs()
 
     def load_recs(self):
-        recs_with_content = []
+        """recs_with_content = []
         tk = mf.tastekid_lookup(self.title, True, True)
         for r in tk['suggestions']:
             recs_with_content.append(Movie(r))
         self.recs = recs_with_content
-        self.rec_content_loaded = True
+        self.rec_content_loaded = True"""
+        for i in range(self.recs._index, len(self.recs.unloaded)):
+            print 'rec: ', self.recs.next().title
 
     def load_info(self):
         omdb = mf.omdb_lookup(self.title)
@@ -49,6 +51,7 @@ class Movie():
                 self.desc = itunes['desc']
             if self.title is None:
                 self.title = tk['title']
+            self.recs = RecList(self.title)
             #        self.recs = tk['suggestions']
         if itunes is not None:
             self.itunes_price = itunes['price']
@@ -60,3 +63,32 @@ class Movie():
             if self.title is None:
                 self.title = itunes['title']
         self.content_loaded = True
+
+class RecList():
+    def __init__(self, title):
+        self.mTitle = title
+        self.unloaded = mf.tastekid_lookup(title, True, True)['suggestions']
+        self._index = 0
+        self.loaded = []
+    
+
+    def next(self):
+        if self._index >= len(self.unloaded):
+            return None
+        title = self.unloaded[self._index]
+        ltitles = [t.title for t in self.loaded]
+        if title not in ltitles:
+            ret = Movie(title)
+            self.loaded.append(ret)
+        else:
+            ret = self.loaded[ltitles.index(title)]
+        if self._index < len(self.unloaded):
+            self._index += 1
+        return ret
+
+    def previous(self):
+        if self._index < 0:
+            return None
+        ret = Movie(self.unloaded[self._index])
+        self._index -= 1
+        return ret

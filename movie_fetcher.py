@@ -58,7 +58,7 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False):
     item = extract_terms(tkjson['Info'][0], config.tk_terms)
     results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
     suggestions = [r['title'] for r in results]
-    tk = {'title':title, 'info':item, 'suggestions':suggestions}
+    tk = {'title':item['title'], 'info':item, 'suggestions':suggestions}
     if cache.in_cache(title):
         cache.remove(title)
     cache.cache(tk)

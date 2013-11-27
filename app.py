@@ -15,9 +15,10 @@ def home():
 def msearch(title=''):
     if request.method == 'POST':
         title = request.form['title']
+        legality = request.form['legality']
     itunes = movie_fetcher.itunes_lookup(title)
     omdb = movie_fetcher.omdb_lookup(title)
-    return render_template('movie.html', itunes=itunes, omdb=omdb)
+    return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality)
 
 if __name__ == "__main__":
     app.debug = True

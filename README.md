@@ -11,7 +11,7 @@ Info - Open Movie Database (works)
 
 Description, Price - iTunes (works)
 
-Reviews - Rotten Tomatoes
+Reviews - Rotten Tomatoes (works)
 
 Trailers, Clips - YouTube, iTunes
 

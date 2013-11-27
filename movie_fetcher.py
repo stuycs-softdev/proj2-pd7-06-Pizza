@@ -70,7 +70,8 @@ def tastekid_json(title):
 # Rotten Tomatoes
 
 def rt_lookup(title):
-    pass
+    rtj = rt_json(title)["movies"][0]
+    return extract_terms(rtj, config.rt_terms)
 
 def rt_json(title):
     url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=vq8bhcvbrnmmwndpv9cw9twr&'

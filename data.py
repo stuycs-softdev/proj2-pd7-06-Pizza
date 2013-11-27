@@ -2,6 +2,9 @@ import movie_fetcher as mf
 class Movie():
     # props: should load all properties but recommendations
     # recs: should load recommendations
+    def __str__(self):
+        return self.title
+
     def __init__(self, title, props=True, recs=False):
         self.title = title
         self.yt = None # dict with yt IDs
@@ -22,14 +25,7 @@ class Movie():
             self.load_recs()
 
     def load_recs(self):
-        """recs_with_content = []
-        tk = mf.tastekid_lookup(self.title, True, True)
-        for r in tk['suggestions']:
-            recs_with_content.append(Movie(r))
-        self.recs = recs_with_content
-        self.rec_content_loaded = True"""
-        for i in range(self.recs._index, len(self.recs.unloaded)):
-            print 'rec: ', self.recs.next().title
+        return self.recs.load_all()
 
     def load_info(self):
         omdb = mf.omdb_lookup(self.title)
@@ -71,6 +67,13 @@ class RecList():
         self._index = 0
         self.loaded = []
     
+    def load_all(self):
+        sindex = self._index
+        self.reset()
+        for i in range(self._index, len(self.unloaded)):
+            self.next()
+        self.rese(sindex)
+        return self.loaded
 
     def next(self):
         if self._index >= len(self.unloaded):
@@ -92,3 +95,6 @@ class RecList():
         ret = Movie(self.unloaded[self._index])
         self._index -= 1
         return ret
+
+    def reset(i=0):
+        self._index = i

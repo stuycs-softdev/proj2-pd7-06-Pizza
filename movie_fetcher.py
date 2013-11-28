@@ -35,28 +35,35 @@ def itunes_json(term):
 # OMDB
 
 def omdb_lookup(title):
-    return extract_terms(omdb_json(title), config.omdb_terms)
+    js = omdb_json(title)
+    return extract_terms(js, config.omdb_terms) if js is not None else None
 
 def omdb_json(title):
     url = 'http://www.omdbapi.com/?'
     url += urlencode({'t':title, 'r':'json', 'plot':'full', 'tomatoes':'true'})
     js = json.load(urllib2.urlopen(url))
+    if js['Response'] == 'False':
+        return None
     js['Actors'] = [a.strip() for a in js['Actors'].split(',')]
     return js
 
 # TasteKid
 
-def tastekid_lookup(title):
-    if cache.in_cache(title):
-        return retrieve_cached(title)
+def tastekid_lookup(title, check_cache=True, load_rec_content=False):
+    if check_cache and cache.in_cache(title):
+        ret = cache.retrieve_cached(title)
+        if (not load_rec_content) or ('suggestions' in ret):
+            return ret
     tkjson = tastekid_json(title)['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms)
     results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
     suggestions = [r['title'] for r in results]
-    tk = {'title':title, 'info':item, 'suggestions':suggestions}
+    tk = {'title':item['title'], 'info':item, 'suggestions':suggestions}
+    if cache.in_cache(title):
+        cache.remove(title)
     cache.cache(tk)
     for r in results:
-        cache.cache(r)
+        cache.cache({'title':r['title'], 'info':r})
     return tk
 
 def tastekid_json(title):

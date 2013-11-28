@@ -20,7 +20,7 @@ def msearch(title=''):
     itunes = movie_fetcher.itunes_lookup(title)
     omdb = movie_fetcher.omdb_lookup(title)
     m=Movie(title)
-    youtubeID=m.yt.ident
+    youtubeID=m.yt['ident']
     return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtubeID)
 
 if __name__ == "__main__":

@@ -20,11 +20,17 @@ omdb_terms = {
     'cast':'Actors'
 }
 
+rt_terms = {
+    "title":"title",
+    "rating":"mpaa_rating",
+    "statement":"critics_consensus",
+    "scores":"ratings",
+    "posters":"posters"
+}
 
 # recommendations
 
 #tastekid
-# BEWARE this stuff is under tastekid_lookup('movie')['info']
 tk_terms = {
     'title':'Name',
     'desc':'wTeaser',

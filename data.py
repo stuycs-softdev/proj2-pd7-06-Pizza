@@ -19,6 +19,10 @@ class Movie():
         self.itunes_currency = None # currency of itunes_price
         self.genre = None # genre
         self.explicit = None # True on explicit
+        self.rating = None # MPAA rating
+        self.review = None #critic consesus
+        self.scores = None # rotten tomatoes scores
+        self.posters = None # rotten tomatoes posters
         if props:
             self.load_info()
         if recs:
@@ -31,6 +35,7 @@ class Movie():
         omdb = mf.omdb_lookup(self.title)
         tk = mf.tastekid_lookup(self.title)
         itunes = mf.itunes_lookup(self.title)
+        rot = mf.rt_lookup(self.title)
         if omdb is not None:
             self.desc = omdb['desc']
             self.img = omdb['img']
@@ -38,13 +43,13 @@ class Movie():
             self.title = omdb['title']
         if tk is not None:
             self.yt = {
-                'ident':tk['info']['youtube_id'],
-                'url':tk['info']['youtube_url'],
-                'title':tk['info']['youtube_title']
+                'ident':tk['youtube_id'],
+                'url':tk['youtube_url'],
+                'title':tk['youtube_title']
             }
-            self.wiki_url = tk['info']['read_more_url']
+            self.wiki_url = tk['read_more_url']
             if self.desc is None or self.desc == 'N/A':
-                self.desc = itunes['desc']
+                self.desc = tk['desc']
             if self.title is None:
                 self.title = tk['title']
             self.recs = RecList(self.title)
@@ -58,6 +63,12 @@ class Movie():
                 self.desc = itunes['desc']
             if self.title is None:
                 self.title = itunes['title']
+        if rot is not None:
+            self.rating = rot['rating']
+            self.review = rot['statement']
+            self.scores = rot['scores']
+            self.posters = rot['posters']
+            self.img = self.posters['original']
         self.content_loaded = True
 
 class RecList():
@@ -74,6 +85,13 @@ class RecList():
             self.next()
         self.reset(sindex)
         return self.loaded
+
+    #get n next recs
+    def get(self, n):
+        ret = []
+        for i in range(n):
+            ret.append(self.next())
+        return ret
 
     def next(self):
         if self._index >= len(self.unloaded):

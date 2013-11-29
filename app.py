@@ -19,9 +19,12 @@ def msearch(title=''):
         legality = request.form['legality']
     itunes = movie_fetcher.itunes_lookup(title)
     omdb = movie_fetcher.omdb_lookup(title)
-    m=Movie(title)
-    youtubeID=m.yt['ident']
-    return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtubeID)
+    try:
+        m=Movie(title)
+        youtubeID=m.yt['ident']
+        return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtubeID)
+    except:
+        return render_template('movie.html',itunes=itunes,omdb=omdb,legality=legality)
 
 if __name__ == "__main__":
     #app.debug = True

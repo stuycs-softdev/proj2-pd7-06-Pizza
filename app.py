@@ -27,5 +27,5 @@ def msearch(title=''):
         return render_template('movie.html',itunes=itunes,omdb=omdb,legality=legality)
 
 if __name__ == "__main__":
-    #app.debug = True
-    app.run(debug=True, host='0.0.0.0', port=7016)
+    app.debug = True
+    app.run()

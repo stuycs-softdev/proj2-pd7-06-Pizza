@@ -31,7 +31,6 @@ rt_terms = {
 # recommendations
 
 #tastekid
-# BEWARE this stuff is under tastekid_lookup('movie')['info']
 tk_terms = {
     'title':'Name',
     'desc':'wTeaser',

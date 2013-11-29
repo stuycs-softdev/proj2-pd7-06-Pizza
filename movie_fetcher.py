@@ -20,11 +20,12 @@ def extract_terms(jsonr, terms):
 # iTunes
 def itunes_lookup(term, check_cache=True):
     if check_cache:
-        ret = cacje.retrieve_valid(title)
+        ret = cache.retrieve_valid(term)
         if ret is not None:
-            iterms = [k for k in config.itunes_terms]
-            ret = {k:v for k,v in ret['info'] if k in iterms}
-            return ret
+            iterms = config.itunes_terms.keys()
+            ret = {k:v for k,v in ret.items() if k in iterms}
+            if ret.keys() == iterms:
+                return ret
     itj = itunes_json(term)['results'][0]
     return extract_terms(itj, config.itunes_terms) if itj is not None else None
 
@@ -39,9 +40,10 @@ def omdb_lookup(title, check_cache=True):
     if check_cache:
         ret = cache.retrieve_valid(title)
         if ret is not None:
-            oterms = [k for k in config.omdb_terms]
-            ret = {k:v for k,v in ret['info'] if k in oterms}
-            return ret
+            oterms = config.omdb_terms.keys()
+            ret = {k:v for k,v in ret.items() if k in oterms}
+            if ret.keys() == oterms:
+                return ret
     js = omdb_json(title)
     return extract_terms(js, config.omdb_terms) if js is not None else None
 
@@ -58,20 +60,20 @@ def omdb_json(title):
 def tastekid_lookup(title, check_cache=True, load_rec_content=False):
     if check_cache and cache.in_cache(title):
         ret = cache.retrieve_valid(title)
-        if (not load_rec_content) or ('suggestions' in ret):
+        tkterms = config.tk_terms
+        ret = {k:v for k,v in ret.items() if k in tkterms}
+        if ((not load_rec_content) or ('suggestions' in ret)) and ret.keys() == tkterms:
             return ret
     tkjson = tastekid_json(title)['Similar']
-    item = extract_terms(tkjson['Info'][0], config.tk_terms)
-    results = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
-    suggestions = [r['title'] for r in results]
-    tk = {'title':item['title'], 'suggestions':suggestions}
-    if cache.in_cache(title):
-        cache.remove(title)
+    item = extract_terms(tkjson['Info'][0], config.tk_terms) #actual movie
+    suggestions = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
+    rec_titles = [r['title'] for r in suggestions]
+    tk = {'title':item['title'], 'suggestions':rec_titles}
     cache.upsert_properties(item)
     cache.cache(tk)
-    for r in results:
+    for r in suggestions:
         cache.upsert_properties(r)
-    for k,v in config.tk_terms.keys():
+    for k,v in config.tk_terms.items():
         tk[k] = v
     return tk
 

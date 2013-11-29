@@ -19,6 +19,10 @@ class Movie():
         self.itunes_currency = None # currency of itunes_price
         self.genre = None # genre
         self.explicit = None # True on explicit
+        self.rating = None # MPAA rating
+        self.review = None #critic consesus
+        self.scores = None # rotten tomatoes scores
+        self.posters = None # rotten tomatoes posters
         if props:
             self.load_info()
         if recs:
@@ -31,6 +35,7 @@ class Movie():
         omdb = mf.omdb_lookup(self.title)
         tk = mf.tastekid_lookup(self.title)
         itunes = mf.itunes_lookup(self.title)
+        rot = mf.rt_lookup(self.title)
         if omdb is not None:
             self.desc = omdb['desc']
             self.img = omdb['img']
@@ -58,6 +63,11 @@ class Movie():
                 self.desc = itunes['desc']
             if self.title is None:
                 self.title = itunes['title']
+        if rot is not None:
+            self.rating = rot['rating']
+            self.review = rot['statement']
+            self.scores = rot['scores']
+            self.posters = rot['posters']
         self.content_loaded = True
 
 class RecList():
@@ -74,6 +84,13 @@ class RecList():
             self.next()
         self.reset(sindex)
         return self.loaded
+
+    #get n next recs
+    def get(self, n):
+        ret = []
+        for i in range(n):
+            ret.append(self.next())
+        return ret
 
     def next(self):
         if self._index >= len(self.unloaded):

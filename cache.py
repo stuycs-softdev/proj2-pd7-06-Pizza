@@ -19,8 +19,9 @@ def retrieve_cached(title):
     return _cache.find_one({'title_lower':title.lower()})
 
 def upsert_properties(props):
-    info = retrieve_cached['info']
-    for k, v in props:
+    cached = retrieve_cached(props['title'])
+    info = cached['info'] if cached is not None and 'info' in cached else {}
+    for k, v in props.items():
         if k != 'title':
             info[k] = v
     cache({'title':props['title'], 'info':info})

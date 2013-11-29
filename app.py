@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask import redirect, url_for, request
 import movie_fetcher
+from data import Movie
 
 app = Flask(__name__)
 
@@ -18,7 +19,12 @@ def msearch(title=''):
         legality = request.form['legality']
     itunes = movie_fetcher.itunes_lookup(title)
     omdb = movie_fetcher.omdb_lookup(title)
-    return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality)
+    try:
+        m=Movie(title)
+        youtubeID=m.yt['ident']
+        return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtubeID)
+    except:
+        return render_template('movie.html',itunes=itunes,omdb=omdb,legality=legality)
 
 if __name__ == "__main__":
     app.debug = True

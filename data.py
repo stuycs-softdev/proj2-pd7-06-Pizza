@@ -68,6 +68,7 @@ class Movie():
             self.review = rot['statement']
             self.scores = rot['scores']
             self.posters = rot['posters']
+            self.img = self.posters['original']
         self.content_loaded = True
 
 class RecList():

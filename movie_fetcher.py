@@ -60,7 +60,7 @@ def omdb_json(title):
 def tastekid_lookup(title, check_cache=True, load_rec_content=False):
     if check_cache and cache.in_cache(title):
         ret = cache.retrieve_valid(title)
-        tkterms = config.tk_terms
+        tkterms = config.tk_terms.keys()
         ret = {k:v for k,v in ret.items() if k in tkterms}
         if ((not load_rec_content) or ('suggestions' in ret)) and ret.keys() == tkterms:
             return ret
@@ -87,7 +87,13 @@ def tastekid_json(title):
     
 # Rotten Tomatoes
 
-def rt_lookup(title):
+def rt_lookup(title, check_cache=True):
+    if check_cache and cache.in_cache(title):
+        ret = cache.retrieve_valid(title)
+        tomaterms = config.rt_terms.keys()
+        ret = {k:v for k,v in ret.items() if k in tomaterms}
+        if ret.keys() == tomaterms:
+            return ret
     rtj = rt_json(title)["movies"][0]
     return extract_terms(rtj, config.rt_terms)
 

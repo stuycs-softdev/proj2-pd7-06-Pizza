@@ -73,8 +73,8 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False):
     cache.cache(tk)
     for r in suggestions:
         cache.upsert_properties(r)
-    for k,v in config.tk_terms.items():
-        tk[k] = v
+    for k in config.tk_terms:
+        tk[k] = item[k]
     return tk
 
 def tastekid_json(title):

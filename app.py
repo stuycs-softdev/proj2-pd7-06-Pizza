@@ -18,17 +18,18 @@ def msearch(title=''):
         title = request.form['title']
         legality = request.form['legality']
     if request.method == 'GET':
-        title=title
         legality = 'legal'
-    itunes = movie_fetcher.itunes_lookup(title)
-    omdb = movie_fetcher.omdb_lookup(title)
     try:
         m=Movie(title)
+        itunes = m.itunes
+        omdb = m.omdb
         youtube_id=m.yt['ident']
-        poster=m.posters['original']
+        poster=m.img
         reclist=m.recs.unloaded
         return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtube_id, poster=poster,reclist=reclist)
     except:
+        itunes = movie_fetcher.itunes_lookup(title)
+        omdb = movie_fetcher.omdb_lookup(title)
         return render_template('movie.html',itunes=itunes,omdb=omdb,legality=legality)
 
 if __name__ == "__main__":

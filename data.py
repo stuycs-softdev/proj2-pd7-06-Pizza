@@ -36,6 +36,10 @@ class Movie():
         tk = mf.tastekid_lookup(self.title)
         itunes = mf.itunes_lookup(self.title)
         rot = mf.rt_lookup(self.title)
+        self.omdb = omdb
+        self.tk = tk
+        self.itunes = itunes
+        self.rot = rot
         if omdb is not None:
             self.desc = omdb['desc']
             self.img = omdb['img']

@@ -20,9 +20,11 @@
   <div class="row">
     <div class="large-12 columns">
       <div class="large-4 columns push-8">
-	<img id="poster" src="{{omdb.img}}" alt="{{omdb.title}}">
+	<img id="poster" src="{{poster}}" alt="{{omdb.title}}">
       </div>
       <div class="large-8 pull-4 columns">
+	<br>
+	<a href="/"><i><u>Back to Search</i></u></a>
 	{% if itunes %}
 	<h1>{{itunes.title}}</h1>
 	<b id="price">{{itunes.price}}</b> <br>
@@ -53,6 +55,16 @@
 		</video> -->
 	</div>
 	{% endif %}
+	<hr>
+	<ul class="no-bullet">
+	  <li><h5>Suggested Movies</h5>
+	    <ul>
+	      {% for rec in reclist %}
+	      <li><a href="/m/{{rec}}">{{rec}}</a></li>
+	      {% endfor %}
+	    </ul>
+	  </li>
+	</ul>
 	<br>
       </div>
     </div>
@@ -63,6 +75,8 @@
   <div class="row">
     <div class="large-12 columns">
       <div class="large-8 large-centered columns">
+	<br>
+	<a href="/"><i><u>Back to Search</i></u></a>
 	<h2 style="text-align:center;">Onward to <a href="http://thepiratebay.sx/search/{{ itunes.title }}">Free Things!</a></h2>
 	<hr>
 	<div class="flex-video">

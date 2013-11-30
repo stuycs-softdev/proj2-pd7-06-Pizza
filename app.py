@@ -12,17 +12,22 @@ def home():
     return render_template('search.html')
 
 @app.route('/m', methods=['POST'])
-@app.route('/m/<title>')
+@app.route('/m/<title>', methods=['GET'])
 def msearch(title=''):
     if request.method == 'POST':
         title = request.form['title']
         legality = request.form['legality']
+    if request.method == 'GET':
+        title=title
+        legality = 'legal'
     itunes = movie_fetcher.itunes_lookup(title)
     omdb = movie_fetcher.omdb_lookup(title)
     try:
         m=Movie(title)
-        youtubeID=m.yt['ident']
-        return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtubeID)
+        youtube_id=m.yt['ident']
+        poster=m.posters['original']
+        reclist=m.recs.unloaded
+        return render_template('movie.html', itunes=itunes, omdb=omdb, legality=legality, youtube_id=youtube_id, poster=poster,reclist=reclist)
     except:
         return render_template('movie.html',itunes=itunes,omdb=omdb,legality=legality)
 

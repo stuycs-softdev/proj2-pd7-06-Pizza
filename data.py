@@ -64,7 +64,7 @@ class Movie():
             self.genre = itunes['genre']
             self.explicit = itunes['explicit'] == 'explicit'
             if self.desc is None or self.desc == 'N/A':
-                self.desc = itunes['desc']
+                self.desc = itunes['desc'] if 'desc' in itunes else None
             if self.title is None:
                 self.title = itunes['title']
         if rot is not None:
@@ -73,6 +73,7 @@ class Movie():
             self.scores = rot['scores']
             self.posters = rot['posters']
             self.img = self.posters['original']
+            self.desc = rot['desc'] if 'desc' in rot else 'No description available.'
         self.content_loaded = True
 
 class RecList():

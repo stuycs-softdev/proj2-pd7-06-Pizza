@@ -14,7 +14,7 @@ import cache
 # parses json returned dicts to movie_fetcher returned dicts, with key to key mapping as defined in terms {'newKey':'oldKey'}
 # usually used with api_config returned terms dicts
 def extract_terms(jsonr, terms):
-    ret = {k:jsonr[terms[k]] for k in terms}
+    ret = {k:jsonr[terms[k]] for k in terms if terms[k] in jsonr}
     return ret
 
 # iTunes
@@ -64,7 +64,12 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False):
         ret = {k:v for k,v in ret.items() if k in tkterms}
         if ((not load_rec_content) or ('suggestions' in ret)) and ret.keys() == tkterms:
             return ret
-    tkjson = tastekid_json(title)['Similar']
+    tkjson = tastekid_json(title)
+    if 'Error' in tkjson:
+        print 'Yarr there be an error fetching tk; trying sneakily'
+        tkjson = tastekid_json(title, False)['Similar']
+    else:
+        tkjson = tkjson['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms) #actual movie
     suggestions = [extract_terms(tk, config.tk_terms) for tk in tkjson['Results']]
     rec_titles = [r['title'] for r in suggestions]
@@ -77,11 +82,14 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False):
         tk[k] = item[k]
     return tk
 
-def tastekid_json(title):
+def tastekid_json(title, use_key=True):
     url = 'http://www.tastekid.com/ask/ws?'
-    url += urlencode({'q':title+'//movies', 'verbose':'1', 'format':'JSON',
-                      'f':keys.tk_f, 'k':keys.tk_k
-                  })
+    params = {'q':title+'//movies', 'verbose':'1', 'format':'JSON',
+                      'f':keys.tk_f, 'k':keys.tk_k}
+    if not use_key:
+        del params['f']
+        del params['k']
+    url += urlencode(params)
     js = json.load(urllib2.urlopen(url))
     return js
     

@@ -67,7 +67,10 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=Tru
     tkjson = tastekid_json(title, use_key)
     if 'Error' in tkjson:
         print 'Yarr there be an error fetching tk; trying sneakily'
-        tkjson = tastekid_json(title, False)['Similar']
+        try:
+            tkjson = tastekid_json(title, False)['Similar']
+        except:
+            return None
     else:
         tkjson = tkjson['Similar']
     item = extract_terms(tkjson['Info'][0], config.tk_terms) #actual movie

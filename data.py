@@ -64,7 +64,7 @@ class Movie():
             self.genre = itunes['genre']
             self.explicit = itunes['explicit'] == 'explicit'
             if self.desc is None or self.desc == 'N/A':
-                self.desc = itunes['desc']
+                self.desc = itunes['desc'] if 'desc' in itunes else 'No description available'
             if self.title is None:
                 self.title = itunes['title']
         if rot is not None:

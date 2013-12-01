@@ -14,7 +14,7 @@ import cache
 # parses json returned dicts to movie_fetcher returned dicts, with key to key mapping as defined in terms {'newKey':'oldKey'}
 # usually used with api_config returned terms dicts
 def extract_terms(jsonr, terms):
-    ret = {k:jsonr[terms[k]] for k in terms}
+    ret = {k:jsonr[terms[k]] for k in terms if terms[k] in jsonr}
     return ret
 
 # iTunes

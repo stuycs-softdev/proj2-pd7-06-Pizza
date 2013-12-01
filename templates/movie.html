@@ -20,24 +20,20 @@
   <div class="row">
     <div class="large-12 columns">
       <div class="large-4 columns push-8">
-	<img id="poster" src="{{poster}}" alt="{{omdb.title}}">
+	<img id="poster" src="{{m.img}}" alt="{{m.title}}">
       </div>
       <div class="large-8 pull-4 columns">
 	<br>
 	<a href="/"><i><u>Back to Search</i></u></a>
-	{% if itunes %}
-	<h1>{{itunes.title}}</h1>
-	<b id="price">{{itunes.price}}</b> <br>
-	{{itunes.desc}}
-	{% elif omdb %}
-	<h1>{{omdb.title}}</h1> <br>
-	{{omdb.desc}}
-	{% endif %}
+	<h1>{{m.title}}</h1>
+	<b id="price">{{m.itunes_price}} {{m.itunes_currency}}</b> 
+	<br>
+	{{m.itunes['desc']}}
 	<hr>
 	<ul class="no-bullet">
 	  <li><h5>Cast</h5>
 	    <ul>
-	      {% for a in omdb.cast %}
+	      {% for a in m.cast %}
 	      <li>{{a}}</li>
 	      {% endfor %}
 	    </ul>

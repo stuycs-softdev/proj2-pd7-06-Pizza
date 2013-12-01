@@ -57,14 +57,14 @@ def omdb_json(title):
     return js
 
 # TasteKid
-def tastekid_lookup(title, check_cache=True, load_rec_content=False):
+def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=True):
     if check_cache and cache.in_cache(title):
         ret = cache.retrieve_valid(title)
         tkterms = config.tk_terms.keys()
         ret = {k:v for k,v in ret.items() if k in tkterms}
         if ((not load_rec_content) or ('suggestions' in ret)) and ret.keys() == tkterms:
             return ret
-    tkjson = tastekid_json(title)
+    tkjson = tastekid_json(title, use_key)
     if 'Error' in tkjson:
         print 'Yarr there be an error fetching tk; trying sneakily'
         tkjson = tastekid_json(title, False)['Similar']
@@ -89,6 +89,7 @@ def tastekid_json(title, use_key=True):
     if not use_key:
         del params['f']
         del params['k']
+        print params
     url += urlencode(params)
     js = json.load(urllib2.urlopen(url))
     return js

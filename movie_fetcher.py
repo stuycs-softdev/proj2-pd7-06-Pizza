@@ -70,6 +70,13 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=Tru
         try:
             tkjson = tastekid_json(title, False)['Similar']
         except:
+            print 'Yarr there be another bloody error; grabbing everything fromcache'
+            ret = cache.retrieve_valid(title)
+            if ret is not None:
+                ret = extract_terms(ret, config.tk_terms)
+                for k in config.tk_terms.keys():
+                    if k not in ret:
+                        ret[k] = None
             return None
     else:
         tkjson = tkjson['Similar']

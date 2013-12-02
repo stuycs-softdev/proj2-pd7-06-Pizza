@@ -23,9 +23,10 @@ def itunes_lookup(term, check_cache=True):
         ret = cache.retrieve_valid(term)
         if ret is not None:
             iterms = config.itunes_terms.keys()
-            ret = {k:v for k,v in ret['info'].items() if k in iterms}
-            if ret.keys() == iterms:
-                return ret
+            if 'info' in ret:
+                ret = {k:v for k,v in ret['info'].items() if k in iterms}
+                if ret.keys() == iterms:
+                    return ret
     itj = itunes_json(term)['results'][0]
     return extract_terms(itj, config.itunes_terms) if itj is not None else None
 
@@ -41,9 +42,10 @@ def omdb_lookup(title, check_cache=True):
         ret = cache.retrieve_valid(title)
         if ret is not None:
             oterms = config.omdb_terms.keys()
-            ret = {k:v for k,v in ret['info'].items() if k in oterms}
-            if ret.keys() == oterms:
-                return ret
+            if 'info' in ret:
+                ret = {k:v for k,v in ret['info'].items() if k in oterms}
+                if ret.keys() == oterms:
+                    return ret
     js = omdb_json(title)
     return extract_terms(js, config.omdb_terms) if js is not None else None
 
@@ -72,7 +74,7 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=Tru
         except:
             print 'Yarr there be another bloody error; grabbing everything fromcache'
             ret = cache.retrieve_cached(title) #ignoring cache limits
-            if ret is not None:
+            if ret is not None and 'info' in ret:
                 ret['info']['suggestions'] = ret['suggestions'] if 'suggestions' in ret else None
                 ret = ret['info']
                 print 'check ret:', ret
@@ -115,6 +117,8 @@ def tastekid_json(title, use_key=True):
 def rt_lookup(title, check_cache=True):
     if check_cache and cache.in_cache(title):
         ret = cache.retrieve_valid(title)
+        if 'info' in ret:
+            ret = ret['info']
         tomaterms = config.rt_terms.keys()
         ret = {k:v for k,v in ret.items() if k in tomaterms}
         if ret.keys() == tomaterms:

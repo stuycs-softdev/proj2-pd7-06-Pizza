@@ -71,7 +71,7 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=Tru
             tkjson = tastekid_json(title, False)['Similar']
         except:
             print 'Yarr there be another bloody error; grabbing everything fromcache'
-            ret = cache.retrieve_valid(title)
+            ret = cache.retrieve_cached(title) #ignoring cache limits
             if ret is not None:
                 ret['info']['suggestions'] = ret['suggestions'] if 'suggestions' in ret else None
                 ret = ret['info']

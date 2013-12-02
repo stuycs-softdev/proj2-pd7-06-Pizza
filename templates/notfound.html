@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <script src="../static/js/vendor/jquery.js"></script>
+        <link rel="stylesheet" href="../static/css/foundation.min.css">
+        <script src="../static/js/foundation/foundation.js"></script>
+        <title>notfound.html</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            .whitetext {
+                color:#ebebeb;
+            }
+            .rounded {
+                border-radius:15px;
+                padding:10px 10px;
+            }
+            #small {
+                font-size:10px;
+            }
+            .shadow {
+                -moz-box-shadow:    3px 3px 5px 6px #ccc;
+                -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+                box-shadow:         3px 3px 5px 6px #ccc;
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $("#container").height(screen.height);
+            })
+        </script>
+    </head>
+    <body style="background-color:#F6F4F0;">
+        <div style="width:980px; margin-left:auto; margin-right:auto; background-color:white;" id="container" class="shadow" >
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">Movies Are Amazing</a></h1>
+                    </li>
+                </ul>
+
+                <section class="top-bar-section">
+                    <!-- Right Nav Section -->
+                    <ul class="right">
+                        <li class="has-form">
+                            <div class="row collapse">
+                                <div class="large-8 small-9 columns">
+                                    <input type="text" placeholder="Not what you want?">
+                                </div>
+                                <div class="large-4 small-3 columns">
+                                    <a href="#" class="alert button expand" style="background-color:#008cba">Search</a>
+                                </div>
+
+                            </div>
+                        </li>
+
+                    </ul>
+                </section>
+            </nav>
+            <br>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="large-8 columns large-centered ">
+                        <div class="row rounded"  style="background:#808080;">
+                            <div class="row">
+                                <div class="large-11 columns large-centered">
+                                    <h1 class="whitetext">Sorry.</h1>
+                                </div>
+                                <div class="large-11 columns large-centered">
+                                    <div class="large-30 columns">
+                                        <h3 class="whitetext">No matching movies were found.</h3>
+                                    </div>
+                                    <div class="large-30 columns">
+                                        <h3 class="whitetext">Please try again.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+
+
+</html>

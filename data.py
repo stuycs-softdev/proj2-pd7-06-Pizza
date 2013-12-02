@@ -56,7 +56,8 @@ class Movie():
                 self.desc = tk['desc']
             if self.title is None:
                 self.title = tk['title']
-            self.recs = RecList(self.title)
+            if 'suggestions' in tk and tk['suggestions'] is not None:
+                self.recs = RecList(self.title)
             #        self.recs = tk['suggestions']
         if itunes is not None:
             self.itunes_price = itunes['price']

@@ -23,7 +23,7 @@ def itunes_lookup(term, check_cache=True):
         ret = cache.retrieve_valid(term)
         if ret is not None:
             iterms = config.itunes_terms.keys()
-            ret = {k:v for k,v in ret.items() if k in iterms}
+            ret = {k:v for k,v in ret['info'].items() if k in iterms}
             if ret.keys() == iterms:
                 return ret
     itj = itunes_json(term)['results'][0]
@@ -41,7 +41,7 @@ def omdb_lookup(title, check_cache=True):
         ret = cache.retrieve_valid(title)
         if ret is not None:
             oterms = config.omdb_terms.keys()
-            ret = {k:v for k,v in ret.items() if k in oterms}
+            ret = {k:v for k,v in ret['info'].items() if k in oterms}
             if ret.keys() == oterms:
                 return ret
     js = omdb_json(title)
@@ -70,6 +70,19 @@ def tastekid_lookup(title, check_cache=True, load_rec_content=False, use_key=Tru
         try:
             tkjson = tastekid_json(title, False)['Similar']
         except:
+            print 'Yarr there be another bloody error; grabbing everything fromcache'
+            ret = cache.retrieve_cached(title) #ignoring cache limits
+            if ret is not None:
+                ret['info']['suggestions'] = ret['suggestions'] if 'suggestions' in ret else None
+                ret = ret['info']
+                print 'check ret:', ret
+                for k in ret.keys():
+                    if k not in config.tk_terms.keys():
+                        del ret[k]
+                for k in config.tk_terms.keys():
+                    if k not in ret:
+                        ret[k] = None
+                return ret
             return None
     else:
         tkjson = tkjson['Similar']

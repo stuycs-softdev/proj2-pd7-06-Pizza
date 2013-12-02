@@ -7,6 +7,7 @@ class Movie():
 
     def __init__(self, title, props=True, recs=False):
         self.title = title
+        self.iurl = None
         self.yt = None # dict with yt IDs
         self.wiki_url = None # wikipedia URL
         self.recs = None # Movie objects of recs
@@ -64,6 +65,7 @@ class Movie():
             self.itunes_currency = itunes['currency']
             self.genre = itunes['genre']
             self.explicit = itunes['explicit'] == 'explicit'
+            self.iurl = itunes['purchase_url']
             if self.desc is None or self.desc == 'N/A':
                 self.desc = itunes['desc'] if 'desc' in itunes else None
             if self.title is None:

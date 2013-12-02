@@ -29,55 +29,57 @@
         </script>
     </head>
     <body style="background-color:#F6F4F0;">
-        <div style="90%; margin-left:auto; margin-right:auto; background-color:white;" id="container" class="shadow" >
-            <nav class="top-bar" data-topbar>
-                <ul class="title-area">
-                    <li class="name">
-                        <h1><a href="/">PizzaMovie</a></h1>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="row">
-                <br>
-                <br>
-                <br>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
-                    <div class="large-8 columns large-centered ">
-                        <div class="row rounded"  style="background:#808080;">
-                            <form class="custom" action="/m" method="POST">
-                                <div class="row">
-                                    <div class="large-11 columns large-centered">
-                                        <h1 class="whitetext">Looking for a movie?</h1>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="large-11 columns large-centered">
-                                        <div class="large-7 columns">
-                                            <h3 class="whitetext">Would you like to:</h3>
-                                        </div>
-                                        <div class="large-5 columns">
-                                            <br>
-                                            <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1"  value="legal" checked="checked" autocomplete="off"> Follow the law? <i id="small">(Buy it)</i></label>
-                                            <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1" value="illegal" autocomplete="off"> Meeh. <i id="small">(PirateBayyyyy)</i></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-11 large-centered columns">
-                                        <br>
-                                        <input type="text" name="title" placeholder="Search movies by title...">
-                                        <input type="submit">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+      <div>
+        <div style="width:90%; margin-left:auto; margin-right:auto; background-color:white;" id="container" class="shadow" >
+          <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="/">PizzaMovie</a></h1>
+              </li>
+            </ul>
+          </nav>
+	  
+          <div class="row">
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <div class="large-8 columns large-centered ">
+                <div class="row rounded"  style="background:#808080;">
+                  <form class="custom" action="/m" method="POST">
+                    <div class="row">
+                      <div class="large-11 columns large-centered">
+                        <h1 class="whitetext">Looking for a movie?</h1>
+                      </div>
                     </div>
+		    
+                    <div class="row">
+                      <div class="large-11 columns large-centered">
+                        <div class="large-7 columns">
+                          <h3 class="whitetext">Would you like to:</h3>
+                        </div>
+                        <div class="large-5 columns">
+                          <br>
+                          <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1"  value="legal" checked="checked" autocomplete="off"> Follow the law? <i id="small">(Buy it)</i></label>
+                          <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1" value="illegal" autocomplete="off"> Meeh. <i id="small">(PirateBayyyyy)</i></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="large-11 large-centered columns">
+                        <br>
+                        <input type="text" name="title" placeholder="Search movies by title...">
+                        <input type="submit">
+                      </div>
+                    </div>
+                  </form>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+	</div>
+      </div>
     </body>
 </html>

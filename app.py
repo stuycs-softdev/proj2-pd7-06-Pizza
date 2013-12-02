@@ -20,16 +20,19 @@ def msearch(title=''):
     if request.method == 'GET':
         legality = 'legal'
     try:
-        m=Movie(title)
-        itunes = m.itunes
-        omdb = m.omdb
-        poster=m.img
-        youtube_id=m.yt['ident']
-        return render_template('movie.html', legality=legality, poster=poster,m=m,youtube_id=youtube_id)
+        try:
+            m=Movie(title)
+            itunes = m.itunes
+            omdb = m.omdb
+            poster=m.img
+            youtube_id=m.yt['ident']
+            return render_template('movie.html', legality=legality, poster=poster,m=m,youtube_id=youtube_id)
+        except:
+            itunes = movie_fetcher.itunes_lookup(title)
+            omdb = movie_fetcher.omdb_lookup(title)
+            return render_template('movie_no_m.html',itunes=itunes,omdb=omdb,legality=legality)
     except:
-        itunes = movie_fetcher.itunes_lookup(title)
-        omdb = movie_fetcher.omdb_lookup(title)
-        return render_template('movie_no_m.html',itunes=itunes,omdb=omdb,legality=legality)
+        return render_template('notfound.html')
 
 if __name__ == "__main__":
     app.debug = True

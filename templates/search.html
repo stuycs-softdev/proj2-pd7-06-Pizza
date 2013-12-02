@@ -1,70 +1,72 @@
-<head>
-    <script src="../static/js/vendor/jquery.js"></script>
-    <link rel="stylesheet" href="./foundation/css/foundation.min.css">
-    <script src="../static/js/foundation/foundation.js"></script>
-    <link rel="stylesheet" href="../static/css/foundation.css">
-    <style>
-        .whitetext {
-            color:#ebebeb;
-        }
-        .rounded {
-            border-radius:15px;
-            padding:10px 10px;
-        }
-        #small {
-            font-size:10px;
-        }
-    </style>
-</head>
-<body>
-    <div style="width:980px; margin-left:auto; margin-right:auto;">
-        <nav class="top-bar" data-topbar>
-            <ul class="title-area">
-                <li class="name">
-                    <h1><a href="#">Movies Are Amazing</a></h1>
-                </li>
-            </ul>
+<html>
+    <head>
+        <script src="../static/js/vendor/jquery.js"></script>
+        <link rel="stylesheet" href="./foundation/css/foundation.min.css">
+        <script src="../static/js/foundation/foundation.js"></script>
+        <link rel="stylesheet" href="../static/css/foundation.css">
+        <style>
+            .whitetext {
+                color:#ebebeb;
+            }
+            .rounded {
+                border-radius:15px;
+                padding:10px 10px;
+            }
+            #small {
+                font-size:10px;
+            }
+        </style>
+    </head>
+    <body style="background-color:#F6F4F0;">
+        <div style="width:980px; margin-left:auto; margin-right:auto; background-color:white; ">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">Movies Are Amazing</a></h1>
+                    </li>
+                </ul>
+            </nav>
 
-
-        </nav>
-
-        <div class="row">
-            <br>
-        </div>
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="large-8 columns large-centered ">
-                    <div class="row rounded"  style="background:#808080;">
-                        <form class="custom" action="/m" method="POST" name="register">
-                            <div class="row">
-                                <div class="large-11 columns large-centered">
-                                    <h1 class="whitetext">Looking for a movie?</h1>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-11 columns large-centered">
-                                    <div class="large-7 columns">
-                                        <h3 class="whitetext">Would you like to:</h3>
+            <div class="row">
+                <br>
+                <br>
+                <br>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="large-8 columns large-centered ">
+                        <div class="row rounded"  style="background:#808080;">
+                            <form class="custom" action="/m" method="POST" name="register">
+                                <div class="row">
+                                    <div class="large-11 columns large-centered">
+                                        <h1 class="whitetext">Looking for a movie?</h1>
                                     </div>
-                                    <div class="large-5 columns">
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-11 columns large-centered">
+                                        <div class="large-7 columns">
+                                            <h3 class="whitetext">Would you like to:</h3>
+                                        </div>
+                                        <div class="large-5 columns">
+                                            <br>
+                                            <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1"  value="legal" checked="checked" autocomplete="off"> Follow the law? <i id="small">(Buy it)</i></label>
+                                            <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1" value="illegal" autocomplete="off"> Meeh. <i id="small">(PirateBayyyyy)</i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-11 large-centered columns">
                                         <br>
-                                        <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1"  value="legal" checked="checked" autocomplete="off"> Follow the law? <i id="small">(Buy it)</i></label>
-                                        <label class="whitetext" for="legality"><input name="legality" type="radio" id="radio1" value="illegal" autocomplete="off"> Meeh. <i id="small">(PirateBayyyyy)</i></label>
+                                        <input type="text" name="title" placeholder="Search movies by title...">
+                                        <input type="submit">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="large-11 large-centered columns">
-                                    <br>
-                                    <input type="text" name="title" placeholder="Search movies by title...">
-                                    <input type="submit">
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>

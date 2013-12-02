@@ -25,7 +25,7 @@ def msearch(title=''):
         omdb = m.omdb
         poster=m.img
         youtube_id=m.yt['ident']
-        return render_template('movie.html', legality=legality, poster=poster,m=m.youtube_id=youtube_id)
+        return render_template('movie.html', legality=legality, poster=poster,m=m,youtube_id=youtube_id)
     except:
         itunes = movie_fetcher.itunes_lookup(title)
         omdb = movie_fetcher.omdb_lookup(title)

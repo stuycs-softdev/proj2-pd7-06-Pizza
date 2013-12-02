@@ -73,7 +73,8 @@ class Movie():
             self.scores = rot['scores']
             self.posters = rot['posters']
             self.img = self.posters['original']
-            self.desc = rot['desc'] if 'desc' in rot else 'No description available.'
+            if self.desc is None or self.desc == 'N/A':
+                self.desc = rot['desc'] if 'desc' in rot else 'No description available.'
         self.content_loaded = True
 
 class RecList():

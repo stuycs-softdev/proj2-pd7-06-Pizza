@@ -1,9 +1,10 @@
 <html>
     <head>
-        <script src="../static/js/vendor/jquery.js"></script>
-        <link rel="stylesheet" href="./foundation/css/foundation.min.css">
-        <script src="../static/js/foundation/foundation.js"></script>
-        <link rel="stylesheet" href="../static/css/foundation.css">
+        <script src="../static/js/jquery.js"></script>
+        <link rel="stylesheet" href="../static/css/foundation.min.css">
+        <!--<link rel="stylesheet" href="../static/css/foundation.css">-->
+        <!--<script src="../static/js/foundation/foundation.js"></script>-->
+
         <style>
             .whitetext {
                 color:#ebebeb;
@@ -15,10 +16,20 @@
             #small {
                 font-size:10px;
             }
+            .shadow {
+                -moz-box-shadow:    3px 3px 5px 6px #ccc;
+                -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+                box-shadow:         3px 3px 5px 6px #ccc;
+            }
         </style>
+        <script>
+            $(document).ready(function() {
+                $("#container").height(screen.height);
+            })
+        </script>
     </head>
     <body style="background-color:#F6F4F0;">
-        <div style="width:980px; margin-left:auto; margin-right:auto; background-color:white; ">
+        <div style="width:980px; margin-left:auto; margin-right:auto; background-color:white;" id="container" class="shadow" >
             <nav class="top-bar" data-topbar>
                 <ul class="title-area">
                     <li class="name">

@@ -72,7 +72,7 @@ class Movie():
                 self.title = itunes['title']
         if rot is not None:
             self.rating = rot['rating']
-            self.review = rot['statement']
+            self.review = rot['statement'] if 'statement' in rot else None
             self.scores = rot['scores']
             self.posters = rot['posters']
             self.img = self.posters['original']

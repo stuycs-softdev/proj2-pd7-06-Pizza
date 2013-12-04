@@ -52,6 +52,24 @@
 	  {{omdb['desc']}}
 
 	  {% endif %}
+	  
+	  {% if m.scores %}
+	  <hr>
+	  {% if m.scores['critics_score'] >= 60 %}
+	  <h5>Critics are saying: <b style="color:red;">{{m.scores['critics_score']}}/100</b>, {{m.scores['critics_rating']}}</h5>
+	  {% else %}
+	  <h5>Critics are saying: <b style="color:#2eb82e;">{{m.scores['critics_score']}}/100</b>, {{m.scores['critics_rating']}}</h5>
+	  {% endif %}
+
+	  <br>
+
+	  {% if m.scores['audience_score'] >= 60 %}
+	  <h5>Viewers are saying: <b style="color:red;">{{m.scores['audience_score']}}/100</b>, {{m.scores['audience_rating']}}</h5>
+	  {% else %}
+	  <h5>Viewers are saying: <b style="color:#2eb82e;">{{m.scores['audience_score']}}/100</b>, {{m.scores['audience_rating']}}</h5>
+	  {% endif %}
+
+	  {% endif %}
 
 
 	  {% if omdb %}
